@@ -13,8 +13,17 @@ public class RecursiveMethods {
 	 */
 	public static double geometricSum(int n) {
 		
-			// FIXME compute the geometric sum for the first n terms recursively
+		double sum = 0.0;
+		if (n == 0) {
 			return 0;
+		}
+		else if(n == 1) {
+			return 0.5;
+		}
+		else {
+			return geometricSum(n - 1) + Math.pow(0.5, n);
+			
+		}
 		
 	}
 
@@ -28,12 +37,17 @@ public class RecursiveMethods {
 	 */
 	public static int gcd(int p, int q) {
 		
-			// FIXME compute the gcd of p and q using recursion
-			return 0;
+			if (p%q == 0) {
+				return q;
+			}
+			else {
+				int newP = q;
+				int newQ = p%q;
+				return gcd(newP, newQ);
+			}
 		
 	}
 
-	
 
 	/**
 	 * This method uses recursion to create a reverse of the given array
@@ -43,11 +57,25 @@ public class RecursiveMethods {
 	 */
 	public static int[] toReversed(int[] array) {
 		
-			// FIXME create a helper method that can recursively reverse the given array
-			return new int[0];
+		int [] reversedArray = new int [array.length];
+		if (array.length == 0) {
+			return new int [0];
+		}
+		else {
+				
+			return helper(0, array, reversedArray);
+			}
 		
 	}
-
+	public static int [] helper (int index, int [] array, int [] reversedArray) {
+		if (index == array.length)
+			return reversedArray;
+		else {
+			int mirroredIndex = (array.length - 1) - index;
+		reversedArray[index] = array[mirroredIndex];
+		return helper (index++, array, reversedArray);
+	}
+	}
 	/**
 	 * @param xCenter                       x-coordinate of the center of the circle
 	 *                                      at the current depth
